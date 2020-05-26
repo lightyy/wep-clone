@@ -149,6 +149,21 @@ a {
   color: white;
 }
 
+.sticky-elem {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+#show-scene-0 #scroll-section-0 .sticky-elem,
+#show-scene-1 #scroll-section-1 .sticky-elem,
+#show-scene-2 #scroll-section-2 .sticky-elem,
+#show-scene-3 #scroll-section-3 .sticky-elem {
+  display: block;
+}
+
 @media (min-width: 1024px) {
   #scroll-section-0 h1 {
     /* vw윈도우 사이즈 기준, 9vw = 윈도우의 9% */
@@ -172,10 +187,10 @@ a {
   .desc-message {
     width: 20%;
   }
-  .mid-message{
+  .mid-message {
     font-size: 4vw;
   }
-  .canvas-caption{
+  .canvas-caption {
     font-size: 2rem;
   }
 }
