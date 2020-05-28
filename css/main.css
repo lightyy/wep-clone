@@ -72,10 +72,11 @@ a {
 
 .scroll-section {
   padding-top: 50vh;
-  border: 3px solid red;
 }
 
 #scroll-section-0 h1 {
+  position: relative;
+  top : -5vh;
   font-size: 4rem;
   text-align: center;
 }
@@ -187,9 +188,16 @@ a {
   display: block;
 }
 
-.sticky-elem-canvas{
-  top : 0;
-  background-color: #ccc;
+.sticky-elem-canvas {
+  top: 0;
+  height: 100vh;
+}
+
+.sticky-elem-canvas canvas {
+  position: absolute;
+  /* 가운데정렬 position 50%  -> translate -50% */
+  top: 50%;
+  left: 50%;
 }
 
 @media (min-width: 1024px) {

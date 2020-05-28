@@ -24,6 +24,7 @@
       values: {
         videoImageCount: 300, //이미지 갯수
         imageSequence: [0, 299], //이미지 순서
+        canvas_opavity: [1, 0, { start: 0.9, end: 1 }], //캔버스 마지막 부드러운처리
         //start, end 애니메이션 구간
         messageA_opacity_in: [0, 1, { start: 0.1, end: 0.2 }],
         messageB_opacity_in: [0, 1, { start: 0.3, end: 0.4 }],
@@ -111,7 +112,6 @@
     }
   }
   setCanvasImages();
-
   function setLayout() {
     //각 스크롤 섹션의 높이 셋팅
     sceneInfo.forEach((scene) => {
@@ -135,7 +135,11 @@
       }
     }
     document.body.setAttribute("id", `show-scene-${currScene}`);
+    //캔버스의 높이와 윈도우창의 비율
+    const heightRatio = window.innerHeight / 1080;
+    sceneInfo[0].objs.canvas.style.transform = `translate3d(-50%,-50%,0) scale(${heightRatio})`;
   }
+
   //값변화 계산
   function calcValues(values, currentYOffset) {
     let rv;
@@ -184,6 +188,11 @@
           calcValues(values.imageSequence, currentYOffset)
         );
         objs.context.drawImage(objs.videoImages[sequence], 0, 0);
+
+        objs.canvas.style.opacity = calcValues(
+          values.canvas_opavity,
+          currentYOffset
+        );
 
         if (scrollRatio <= 0.22) {
           // in
@@ -405,6 +414,10 @@
   });
   //창 사이즈가 바뀔때 발생
   // window.addEventListener("DOMContentLoaded", setLayout);
-  window.addEventListener("load", setLayout);
+  window.addEventListener("load", () => {
+    setLayout();
+    setCanvasImages();
+    sceneInfo[0].objs.context.drawImage(sceneInfo[0].objs.videoImages[0], 0, 0);
+  });
   window.addEventListener("resize", setLayout);
 })();
